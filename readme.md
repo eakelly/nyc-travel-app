@@ -20,3 +20,4 @@
 
 - Yelp
 - Groupon
+- FourSquare
