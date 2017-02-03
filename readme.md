@@ -1,5 +1,7 @@
 #
-**nyc-travel-app current languages / technologies:**
+**nyc-travel-app**
+==================
+**current languages / technologies:**
 
 - Python 3.6
 - PostgreSQL 9.6.1 
