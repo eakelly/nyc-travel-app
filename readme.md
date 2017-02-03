@@ -18,6 +18,11 @@
 
 **Web APIs**
 
-- Yelp
-- Groupon
-- FourSquare
+- Yelp (working)
+- Groupon (requesting partner API key)
+- FourSquare (pending)
+- Fandango (
+- Spotify (pending)
+- Songkick (requested API key)
+- Eventful
+- Sqoot

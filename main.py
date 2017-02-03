@@ -6,7 +6,7 @@ import locale
 def main():
 	r = requests.get("https://www.southwest.com")
 
-	request_text = r.text.encode('utf-8')
+	request_text = str(r.text.encode('utf-8'))
 	with open("southwestindex.html", "w+") as writefile:
 		writefile.write(request_text)
 	soup = BeautifulSoup(request_text, 'html.parser')
