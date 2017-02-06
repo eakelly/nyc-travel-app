@@ -1,28 +1,22 @@
-#
-**nyc-travel-app**
-==================
-**current languages / technologies:**
+**Environment setup instructions:**
 
-- Python 3.6
-- PostgreSQL 9.6.1
-- (for Windows) Visual Studio 2015 - make sure Common Tools for Visual C++ 2015 is installed
-
-**Python libraries:**
-
-- pip
-- requests
-- beautifulsoup4
-- scrapy
-- django
-- twisted (included with scrapy)
-
-**Web APIs**
-
-- Yelp (working)
-- Groupon (requesting partner API key)
-- FourSquare (pending)
-- Fandango (
-- Spotify (pending)
-- Songkick (requested API key)
-- Eventful
-- Sqoot
+- 1. Install Python 3.6 (64-bit if possible)
+	- https://www.python.org/downloads/windows/
+	- python.org default downloads 32-bit installer 
+- 2. Install Visual Studio Community Edition
+	- https://www.visualstudio.com/vs/community/
+- 3. Install Git Bash
+- 4. Set path variables for Python 3.6
+- 5. Go to Programs and Features
+	- Microsoft Visual Studio Commuinty 2015 with Updates
+	- Change
+	- Modify
+	- Programming Languages
+		- Visual C++
+			- Check checkbox next to Common Tools for Visual C++ 2015
+			- (necessary to build twisted and other wheels for dependencies)
+- 6. Pull code from github repository
+- 7. Run dependencies bash file from root of repository
+	- Installs pip and then proceeds to pip dependencies
+- 8. Create a config.py file within /api directory, and copy data from Google Document with API keys	
+- 9. If desired set up git using IDE
