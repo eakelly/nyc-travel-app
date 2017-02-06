@@ -1,46 +1,54 @@
-import rauth
-import time
+import requests
 import config
 
-def get_params(location):
-    # See the Yelp API for more details
-    params = {}
-    params["term"] = "restaurant"
-    params["location"] = str(location)
-    params["radius_filter"] = "2000"
-    params["limit"] = "10"
+##########################
+#### GLOBAL VARIABLES ####
+##########################
+
+base_url = 'https://api.yelp.com/v3/businesses/'
+data = {'grant_type': 'client_credentials',
+        'client_id': config.yelp['client_id'],
+        'client_secret': config.yelp['client_secret']}
+
+###########################
+
+
+def get_search_parameters(location):
+    # Parameters: term, location, latitude, longitude, radius, categories,
+    # locale, limit, offset, sort_by, price, open_now, open_at, attributes
+
+    params = {'term': 'restaurant',
+              'location': str(location),
+              'radius': '1000',
+              'limit': '5'}
 
     return params
 
 
-def get_results(params):
-    # Obtain these from Yelp's manage access page
-    consumer_key = config.yelp['consumer_key']
-    consumer_secret = config.yelp['consumer_secret']
-    token = config.yelp['token']
-    token_secret = config.yelp['token_secret']
-
-    session = rauth.OAuth1Session(
-        consumer_key=consumer_key
-        , consumer_secret=consumer_secret
-        , access_token=token
-        , access_token_secret=token_secret)
-
-    request = session.get("http://api.yelp.com/v2/search", params=params)
-
-    data = request.json()
-    session.close()
-
-    return data
-
 def main():
-    location = "Hunter College"
+    #Location: address, neighborhood, city, state, zip, latitude, longitude
+    location = 11228
 
-    params = get_params(location)
-    data = get_results(params)
-    time.sleep(1.0)
-    for business in data['businesses']:
-        print ("%s, Rating: %s" % (business['name'],business['rating']))
+    #get access token for authentication
+    token = requests.post('https://api.yelp.com/oauth2/token', data=data)
+    access_token = token.json()['access_token']
 
+    #get parameters for request
+    url = base_url + 'search'
+    params = get_search_parameters(location)
+    headers = {'Authorization': 'bearer %s' % access_token}
+
+    request_list = requests.get(url=url, params=params, headers=headers)
+    business_list = request_list.json()
+
+    #request business information individually using business id
+    for business in business_list['businesses']:
+        print (business['name'])
+
+        url = base_url + business['id']
+        request_information = requests.get(url=url,headers=headers)
+        business_information = request_information.json()
+
+        print (business_information['hours'])
 
 main()
