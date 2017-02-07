@@ -8,6 +8,8 @@ def searchBy(location, radius):
     
     json.load(urllib2.urlopen(url))
     
-    for item in data['deals']:
-        print item['title']
-        print item['short_title']
+    for deals in data['deals']:
+        print (deals['deal']['title'])
+        print (deals['deal']['short_title'])
+        print '$' + str((deals['deal']['price']))
+        print ("")
