@@ -1,33 +1,36 @@
 #!/bin/bash
-echo "Downloading pip source code..\n"
+printf "Downloading pip source code..\n"
 curl https://bootstrap.pypa.io/get-pip.py > get-pip.py
 
-echo "Installing pip..\n"
+printf "Installing pip..\n"
 python get-pip.py
 
-echo "Deleting pip source code..\n"
+printf "Deleting pip source code..\n"
 rm get-pip.py
 clear
 
-echo "Installing requests...\n"
+printf "Installing requests...\n"
 pip install requests
 
-echo "Installing beautifulsoup4...\n"
+printf "Installing beautifulsoup4...\n"
 pip install beautifulsoup4
 
-echo "Installing twisted... (necessary dependency for scrapy)."
-echo "If any errors occur, Visual Studio has not been installed or configured correctly to build wheel source."
+printf "Installing twisted... (necessary dependency for scrapy)."
+printf "If any errors occur, Visual Studio has not been installed or configured correctly to build wheel source."
 if [[ "$OSTYPE" == "msys" ]]; then
 	pip install Twisted[windows_platform]
 else 
 	pip install Twisted
 fi
 
-echo "Installing scrapy...\n"
+printf "Installing scrapy...\n"
 pip install scrapy
 
-echo "Installing django...\n"
+printf "Installing django...\n"
 pip install django
 
-echo "Installing rauth...\n"
+printf "Installing rauth...\n"
 pip install rauth
+
+printf "Installing tabualte..\n"
+pip install tabulate
