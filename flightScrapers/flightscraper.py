@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import os
 import sys
+from tabulate import tabulate
 
 # returnAirport:
 # twoWayTrip:true
@@ -43,13 +44,38 @@ def main():
     returning = []
 
     for row in soup.findAll('input', {"class": "upsellOutboundRadio"}):
-        # print(row)
-        departing.append(row['title'])
-        print(row['title'])
+        row = row['title'].split(" ")
+        row.pop(0)
+        row.pop(0)
+        row.pop(3)
+        row.pop(4)
+        row.pop(5)
+        row.pop(5)
+        row.pop(5)
+        row.pop(5)
+        row.pop(5)
+        departing.append(row)
+
 
     for row in soup.findAll('input', {"class": "upsellInboundRadio"}):
-        returning.append(row['title'])
-        print(row['title'])
+        row = row['title'].split(" ")
+        row.pop(0)
+        row.pop(0)
+        row.pop(3)
+        row.pop(4)
+        row.pop(5)
+        row.pop(5)
+        row.pop(5)
+        row.pop(5)
+        row.pop(5)
+        returning.append(row)
+        # print(row['title'])
+
+    print(tabulate(departing, ["Flight #", "Price", "Departure time", "Arrival time", "Stops"]))
+    print("\n")
+    print(tabulate(returning, ["Flight #", "Price", "Departure time", "Arrival time", "Stops"]))
 
     with open("save_swa_scrape.txt", 'w+', encoding='utf-8') as writefile:
         writefile.write(soup.prettify())
+
+main()
