@@ -11,4 +11,15 @@ ssh-add "github"
 
 cd $DIRECTORY
 
-git pull
+if [ $1 == "pull" ]; then 
+	git pull
+fi
+if [ $1 == "push" ];
+then
+	if [ "$2" != "" ]; 
+	then 
+		git add .
+		git commit -m "$2"
+		git push
+	fi
+fi
